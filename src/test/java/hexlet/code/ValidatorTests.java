@@ -2,31 +2,33 @@ package hexlet.code;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class ValidatorTests {
 
     @Test
-    public void test() {
+    public void testStringSchema() {
         Validator v = new Validator();
         StringSchema schema = v.string();
 
-        System.out.println(schema.isValid(""));
-        System.out.println(schema.isValid(null));
+        assertThat(schema.isValid("")).isTrue();
+        assertThat(schema.isValid(null)).isTrue();
 
         schema.required();
 
-        System.out.println(schema.isValid("what does the fox say"));; // true
-        System.out.println(schema.isValid("hexlet")); // true
-        System.out.println(schema.isValid(null));// false
-        System.out.println(schema.isValid("")); // false
+        assertThat(schema.isValid("what does the fox say")).isTrue();
+        assertThat(schema.isValid("hexlet")).isTrue();
+        assertThat(schema.isValid(null)).isFalse();
+        assertThat(schema.isValid("")).isFalse();
 
-        System.out.println(schema.contains("wh").isValid("what does the fox say"));
-        System.out.println(schema.contains("what").isValid("what does the fox say"));
-        System.out.println(schema.contains("whatthe").isValid("what does the fox say"));
+        assertThat(schema.contains("wh").isValid("what does the fox say")).isTrue();
+        assertThat(schema.contains("what").isValid("what does the fox say")).isTrue();
+        assertThat(schema.contains("whatthe").isValid("what does the fox say")).isFalse();
 
-        System.out.println(schema.isValid("what does the fox say")); // false
+        assertThat(schema.isValid("what does the fox say")).isFalse();
 
-        System.out.println(schema.minLength(4).isValid("test")); //true
-        System.out.println(schema.minLength(5).isValid("test")); //false
+        assertThat(schema.minLength(4).isValid("test")).isTrue();
+        assertThat(schema.minLength(5).isValid("test")).isFalse();
 
     }
 }
