@@ -1,6 +1,6 @@
 package hexlet.code;
 
-public class StringSchema {
+public class StringSchema extends BaseSchema {
 
     static String status = "not required";
     static String sbstr;
@@ -10,15 +10,15 @@ public class StringSchema {
     }
 
 
-    public static boolean isValid(String input) {
+    public static boolean isValid(Object input) {
         if (status.equals("not required")) {
             return true;
         } else if (status.equals("required")) {
-            return input instanceof String && !input.isEmpty();
+            return input instanceof String && !((String) input).isEmpty();
         } else if (status.equals("contains")) {
-            return input.contains(sbstr);
+            return ((String) input).contains(sbstr);
         } else if (status.equals("minLength")) {
-            return input.length() >= minLength;
+            return ((String) input).length() >= minLength;
         }
         return false;
     }

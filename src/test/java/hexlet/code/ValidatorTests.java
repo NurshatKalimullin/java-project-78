@@ -31,4 +31,29 @@ public class ValidatorTests {
         assertThat(schema.minLength(5).isValid("test")).isFalse();
 
     }
+
+    @Test
+    public void testNumberSchema() {
+        Validator v = new Validator();
+
+        NumberSchema schema = v.number();
+
+        assertThat(schema.isValid(null)).isTrue();
+
+        schema.required();
+
+        assertThat(schema.isValid(null)).isFalse();
+        assertThat(schema.isValid(10)).isTrue();
+        assertThat(schema.isValid("5")).isFalse();
+
+        assertThat(schema.positive().isValid(10)).isTrue();
+        assertThat(schema.positive().isValid(-10)).isFalse();
+
+        schema.range(5, 10);
+
+        assertThat(schema.isValid(5)).isTrue();
+        assertThat(schema.isValid(10)).isTrue();
+        assertThat(schema.isValid(4)).isFalse();
+        assertThat(schema.isValid(11)).isFalse();
+    }
 }
