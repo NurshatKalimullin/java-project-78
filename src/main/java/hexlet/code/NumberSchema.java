@@ -2,9 +2,9 @@ package hexlet.code;
 
 public class NumberSchema extends BaseSchema {
 
-    static String status = "not required";
-    static int start;
-    static int end;
+    private static String status = "not required";
+    private static int start;
+    private static int end;
 
     public NumberSchema() {
     }

@@ -2,9 +2,9 @@ package hexlet.code;
 
 public class StringSchema extends BaseSchema {
 
-    static String status = "not required";
-    static String sbstr;
-    static int minLength;
+    private static String status = "not required";
+    private static String sbstr;
+    private static int minLength;
 
     public StringSchema() {
     }
