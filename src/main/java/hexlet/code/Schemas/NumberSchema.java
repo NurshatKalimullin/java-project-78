@@ -1,42 +1,30 @@
 package hexlet.code.Schemas;
 
-public class NumberSchema extends BaseSchema {
+import java.util.function.Predicate;
 
-    private static String status = "not required";
-    private static int start;
-    private static int end;
+public class NumberSchema extends BaseSchema {
 
     public NumberSchema() {
         super(Integer.class);
     }
 
-    public static boolean isValid(Object input) {
-        if (isRequired()) {
-            return input instanceof Integer;
-        } else if (status.equals("positive")) {
-            return (Integer) input > 0;
-        } else if (status.equals("range")) {
-            return (Integer) input >= start && (Integer) input <= end;
-        }
-        return false;
-    }
-
-
     public NumberSchema required() {
+        Predicate<Integer> validation = input -> input != null;
+        setValidation(validation);
         setRequired(true);
         return this;
     }
 
 
     public NumberSchema positive() {
-        status = "positive";
+        Predicate<Integer> validation = input -> input > 0;
+        setValidation(validation);
         return this;
     }
 
     public NumberSchema range(int start, int end) {
-        NumberSchema.end = end;
-        NumberSchema.start = start;
-        status = "range";
+        Predicate<Integer> validation = input -> input >= start && input <= end;
+        setValidation(validation);
         return this;
     }
 }
