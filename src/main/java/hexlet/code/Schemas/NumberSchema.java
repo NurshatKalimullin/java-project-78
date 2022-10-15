@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.Schemas;
 
 public class NumberSchema extends BaseSchema {
 
@@ -7,12 +7,11 @@ public class NumberSchema extends BaseSchema {
     private static int end;
 
     public NumberSchema() {
+        super(Integer.class);
     }
 
     public static boolean isValid(Object input) {
-        if (status.equals("not required")) {
-            return true;
-        } else if (status.equals("required")) {
+        if (isRequired()) {
             return input instanceof Integer;
         } else if (status.equals("positive")) {
             return (Integer) input > 0;
@@ -23,8 +22,9 @@ public class NumberSchema extends BaseSchema {
     }
 
 
-    public void required() {
-        status = "required";
+    public NumberSchema required() {
+        setRequired(true);
+        return this;
     }
 
 

@@ -1,5 +1,9 @@
 package hexlet.code;
 
+import hexlet.code.Schemas.MapSchema;
+import hexlet.code.Schemas.NumberSchema;
+import hexlet.code.Schemas.StringSchema;
+
 public class Validator {
 
     public Validator() {
