@@ -34,8 +34,10 @@ public class ValidatorTests {
 
         assertThat(schema.isValid("what does the fox say")).isFalse();
 
-        assertThat(schema.minLength(4).isValid("test")).isTrue();
-        assertThat(schema.minLength(5).isValid("test")).isFalse();
+        int minLength = 4;
+        assertThat(schema.minLength(minLength).isValid("test")).isTrue();
+        minLength = 5;
+        assertThat(schema.minLength(minLength).isValid("test")).isFalse();
 
     }
 
@@ -56,7 +58,9 @@ public class ValidatorTests {
         Validator v = new Validator();
         StringSchema schema = v.string();
 
+        int minLength = 4;
         assertThat(schema.minLength(4).isValid("test")).isTrue();
+        minLength = 5;
         assertThat(schema.minLength(5).isValid("test")).isFalse();
 
     }
@@ -68,24 +72,30 @@ public class ValidatorTests {
 
         NumberSchema schema = v.number();
 
+        int testNumber = 10;
         assertThat(schema.isValid(null)).isTrue();
-        assertThat(schema.isValid(10)).isTrue();
+        assertThat(schema.isValid(testNumber)).isTrue();
 
         schema.required();
 
         assertThat(schema.isValid(null)).isFalse();
-        assertThat(schema.isValid(10)).isTrue();
+        assertThat(schema.isValid(testNumber)).isTrue();
         assertThat(schema.isValid("5")).isFalse();
 
-        assertThat(schema.positive().isValid(10)).isTrue();
-        assertThat(schema.positive().isValid(-10)).isFalse();
+        assertThat(schema.positive().isValid(testNumber)).isTrue();
+        assertThat(schema.positive().isValid(-testNumber)).isFalse();
 
-        schema.range(5, 10);
+        int min = 5;
+        int max = 10;
+        schema.range(min, max);
 
-        assertThat(schema.isValid(5)).isTrue();
-        assertThat(schema.isValid(10)).isTrue();
-        assertThat(schema.isValid(4)).isFalse();
-        assertThat(schema.isValid(11)).isFalse();
+        assertThat(schema.isValid(testNumber)).isTrue();
+        testNumber = 5;
+        assertThat(schema.isValid(testNumber)).isTrue();
+        testNumber = 4;
+        assertThat(schema.isValid(testNumber)).isFalse();
+        testNumber = 11;
+        assertThat(schema.isValid(testNumber)).isFalse();
     }
 
     @Test
@@ -94,11 +104,12 @@ public class ValidatorTests {
 
         NumberSchema schema = v.number();
 
-        assertThat(schema.positive().isValid(10)).isTrue();
-        assertThat(schema.positive().isValid(-10)).isFalse();
+        int testNumber = 10;
+        assertThat(schema.positive().isValid(testNumber)).isTrue();
+        assertThat(schema.positive().isValid(-testNumber)).isFalse();
 
         assertThat(schema.isValid(null)).isTrue();
-        assertThat(schema.isValid(10)).isTrue();
+        assertThat(schema.isValid(testNumber)).isTrue();
     }
 
 
@@ -108,15 +119,22 @@ public class ValidatorTests {
 
         NumberSchema schema = v.number();
 
-        schema.range(5, 10);
+        int min = 5;
+        int max = 10;
+        schema.range(min, max);
 
-        assertThat(schema.isValid(5)).isTrue();
-        assertThat(schema.isValid(10)).isTrue();
-        assertThat(schema.isValid(4)).isFalse();
-        assertThat(schema.isValid(11)).isFalse();
+        int testNumber = 5;
+        assertThat(schema.isValid(testNumber)).isTrue();
+        testNumber = 10;
+        assertThat(schema.isValid(testNumber)).isTrue();
+        testNumber = 4;
+        assertThat(schema.isValid(testNumber)).isFalse();
+        testNumber = 11;
+        assertThat(schema.isValid(testNumber)).isFalse();
 
         assertThat(schema.isValid(null)).isTrue();
-        assertThat(schema.isValid(10)).isTrue();
+        testNumber = 10;
+        assertThat(schema.isValid(testNumber)).isTrue();
     }
 
 
@@ -138,7 +156,8 @@ public class ValidatorTests {
         assertThat(schema.isValid(new HashMap())).isTrue();
         assertThat(schema.isValid(data)).isTrue();
 
-        schema.sizeof(2);
+        int testSize = 2;
+        schema.sizeof(testSize);
 
         assertThat(schema.isValid(data)).isFalse();
         data.put("key2", "value2");
@@ -152,13 +171,15 @@ public class ValidatorTests {
 
         MapSchema schema = v.map();
 
-        schema.sizeof(1);
+        int testSize = 1;
+        schema.sizeof(testSize);
 
         Map<String, String> data = new HashMap<>();
         data.put("key1", "value1");
         assertThat(schema.isValid(data)).isTrue();
 
-        schema.sizeof(2);
+        testSize = 2;
+        schema.sizeof(testSize);
         assertThat(schema.isValid(data)).isFalse();
         data.put("key2", "value2");
         assertThat(schema.isValid(data)).isTrue();
