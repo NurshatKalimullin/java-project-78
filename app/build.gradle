@@ -27,14 +27,6 @@ dependencies {
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.23.1'
 }
 
-tasks.withType(Test) {
-    useJUnitPlatform()
-
-    testLogging {     // This is for logging and can be removed.
-        events("passed", "skipped", "failed")
-    }
-}
-
 jacocoTestReport {
     reports {
         xml.required = true
@@ -42,6 +34,10 @@ jacocoTestReport {
 }
 
 test {
+    useJUnitPlatform()
+    testLogging {     // This is for logging and can be removed.
+        events("passed", "skipped", "failed")
+    }
     finalizedBy jacocoTestReport
 }
 
