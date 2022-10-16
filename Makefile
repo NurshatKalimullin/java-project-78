@@ -10,7 +10,7 @@ install:
 	./gradlew clean install
 
 run-dist:
-	./build/install/java-project-lvl2/bin/java-project-lvl2
+	./build/install/java-project-lvl2/bin/java-project-78
 
 run:
 	./gradlew run
