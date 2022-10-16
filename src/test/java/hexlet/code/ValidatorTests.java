@@ -14,12 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ValidatorTests {
 
     @Test
-    public void testStringSchema() {
+    public void testStringSchemaForward() {
         Validator v = new Validator();
         StringSchema schema = v.string();
 
         assertThat(schema.isValid("")).isTrue();
-        System.out.println("I am here!");
         assertThat(schema.isValid(null)).isTrue();
 
         schema.required();
@@ -41,12 +40,42 @@ public class ValidatorTests {
     }
 
     @Test
-    public void testNumberSchema() {
+    public void testStringSchemaContainsWithoutRequired() {
+        Validator v = new Validator();
+        StringSchema schema = v.string();
+
+        assertThat(schema.contains("wh").isValid("what does the fox say")).isTrue();
+        assertThat(schema.contains("what").isValid("what does the fox say")).isTrue();
+        assertThat(schema.contains("whatthe").isValid("what does the fox say")).isFalse();
+
+        assertThat(schema.isValid("")).isTrue();
+        assertThat(schema.isValid(null)).isTrue();
+
+    }
+
+
+    @Test
+    public void testStringSchemaMinLengthWithoutRequired() {
+        Validator v = new Validator();
+        StringSchema schema = v.string();
+
+        assertThat(schema.minLength(4).isValid("test")).isTrue();
+        assertThat(schema.minLength(5).isValid("test")).isFalse();
+
+        assertThat(schema.isValid("")).isTrue();
+        assertThat(schema.isValid(null)).isTrue();
+
+    }
+
+
+    @Test
+    public void testNumberSchemaForward() {
         Validator v = new Validator();
 
         NumberSchema schema = v.number();
 
         assertThat(schema.isValid(null)).isTrue();
+        assertThat(schema.isValid(10)).isTrue();
 
         schema.required();
 
@@ -65,21 +94,54 @@ public class ValidatorTests {
         assertThat(schema.isValid(11)).isFalse();
     }
 
+    @Test
+    public void testNumberSchemaPositiveWithoutRequired() {
+        Validator v = new Validator();
+
+        NumberSchema schema = v.number();
+
+        assertThat(schema.positive().isValid(10)).isTrue();
+        assertThat(schema.positive().isValid(-10)).isFalse();
+
+        assertThat(schema.isValid(null)).isTrue();
+        assertThat(schema.isValid(10)).isTrue();
+    }
+
 
     @Test
-    public void testMapSchema() {
+    public void testNumberSchemaRangeWithoutRequired() {
+        Validator v = new Validator();
+
+        NumberSchema schema = v.number();
+
+        schema.range(5, 10);
+
+        assertThat(schema.isValid(5)).isTrue();
+        assertThat(schema.isValid(10)).isTrue();
+        assertThat(schema.isValid(4)).isFalse();
+        assertThat(schema.isValid(11)).isFalse();
+
+        assertThat(schema.isValid(null)).isTrue();
+        assertThat(schema.isValid(10)).isTrue();
+    }
+
+
+    @Test
+    public void testMapSchemaForward() {
         Validator v = new Validator();
 
         MapSchema schema = v.map();
 
         assertThat(schema.isValid(null)).isTrue();
 
+        Map<String, String> data = new HashMap<>();
+        data.put("key1", "value1");
+        assertThat(schema.isValid(data)).isTrue();
+
         schema.required();
 
         assertThat(schema.isValid(null)).isFalse();
         assertThat(schema.isValid(new HashMap())).isTrue();
-        Map<String, String> data = new HashMap<>();
-        data.put("key1", "value1");
         assertThat(schema.isValid(data)).isTrue();
 
         schema.sizeof(2);
@@ -89,8 +151,30 @@ public class ValidatorTests {
         assertThat(schema.isValid(data)).isTrue();
     }
 
+
     @Test
-    public void testShape(){
+    public void testMapSchemaSizeofWithoutRequired() {
+        Validator v = new Validator();
+
+        MapSchema schema = v.map();
+
+        schema.sizeof(1);
+
+        Map<String, String> data = new HashMap<>();
+        data.put("key1", "value1");
+        assertThat(schema.isValid(data)).isTrue();
+
+        schema.sizeof(2);
+        assertThat(schema.isValid(data)).isFalse();
+        data.put("key2", "value2");
+        assertThat(schema.isValid(data)).isTrue();
+
+    }
+
+
+
+    @Test
+    public void testMapSchemaSizeofShape(){
 
         Validator v = new Validator();
 
