@@ -8,16 +8,16 @@ public class BaseSchema {
     private static boolean required = false;
     private final Class<?> schemaType;
 
-    public BaseSchema(Class<?> schemaType) {
-        this.schemaType = schemaType;
+    public BaseSchema(Class<?> type) {
+        this.schemaType = type;
     }
 
-    public final void setRequired(boolean required) {
-        BaseSchema.required = required;
+    public final void setRequired(boolean value) {
+        BaseSchema.required = value;
     }
 
-    public final void setValidation(Predicate validation) {
-        this.validation = validation;
+    public final void setValidation(Predicate predicate) {
+        this.validation = predicate;
     }
 
     public final boolean isValid(Object input) {
