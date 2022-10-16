@@ -21,13 +21,19 @@ public class BaseSchema {
     }
 
     public boolean isValid(Object input) {
-        boolean result = true;
-        if (required) {
-            if (!schemaType.isInstance(input)) {
-                return false;
+        boolean result = !required;
+        System.out.println(input);
+        if (input == null && required == false || required == false && !schemaType.isInstance(input)) {
+            System.out.println("Required false");
+            result = true;
+        } else if (schemaType.isInstance(input)) {
+            if (validation == null) {
+                result = true;
+            } else {
+                System.out.println("Now we are testing:");
+                result = validation.test(input);
+                System.out.println("For " + input + " result: " + result);
             }
-            result = validation.test(input);
-            System.out.println("For " + input + " result: " + result);
         }
         return result;
     }
