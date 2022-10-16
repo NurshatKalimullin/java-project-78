@@ -22,7 +22,6 @@ public class BaseSchema {
 
     public final boolean isValid(Object input) {
         boolean result = !required;
-        System.out.println("Required is " + required);
         if (input == null && !required
                 || !required && !schemaType.isInstance(input)) {
             result = true;
