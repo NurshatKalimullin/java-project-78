@@ -24,22 +24,6 @@ public class MapSchema extends BaseSchema {
     }
 
     public MapSchema shape(Map<String, BaseSchema> schemas) {
-        Set<String> keysSchemas = schemas.keySet();
-//        Predicate<Map> validation = input -> {
-//            Set<String> testKeys = s;
-//            boolean result = true;
-//            String k = null;
-//            for (String key : testKeys) {
-//                k = key;
-//                System.out.println("Now we test " + input.get(key));
-//                result = schemas.get(key).isValid(input.get(key));
-//                break;
-//            }
-//            testKeys.remove(k);
-//            setRequired(false);
-//            System.out.println("Now we change required to " + getRequired());
-//            return result;
-//        };
         Predicate<Map> validation = input -> {
             Set<String> keys = input.keySet();
             boolean result = false;

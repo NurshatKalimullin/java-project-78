@@ -8,7 +8,7 @@ public class BaseSchema {
     private static boolean required = false;
     private final Class<?> schemaType;
 
-    public BaseSchema(Class<?> schemaType) {
+    protected BaseSchema(Class<?> schemaType) {
         this.schemaType = schemaType;
     }
 
