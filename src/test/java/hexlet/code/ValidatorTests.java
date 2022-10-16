@@ -189,7 +189,7 @@ public class ValidatorTests {
 
 
     @Test
-    public void testMapSchemaSizeofShape(){
+    public void testMapSchemaSizeofShape() {
 
         Validator v = new Validator();
 
