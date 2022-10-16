@@ -34,10 +34,10 @@ public class ValidatorTests {
 
         assertThat(schema.isValid("what does the fox say")).isFalse();
 
-        int minLength = 4;
-        assertThat(schema.minLength(minLength).isValid("test")).isTrue();
-        minLength = 5;
-        assertThat(schema.minLength(minLength).isValid("test")).isFalse();
+        String minLength = "4";
+        assertThat(schema.minLength(Integer.parseInt(minLength)).isValid("test")).isTrue();
+        minLength = "5";
+        assertThat(schema.minLength(Integer.parseInt(minLength)).isValid("test")).isFalse();
 
     }
 
@@ -58,10 +58,10 @@ public class ValidatorTests {
         Validator v = new Validator();
         StringSchema schema = v.string();
 
-        int minLength = 4;
-        assertThat(schema.minLength(4).isValid("test")).isTrue();
-        minLength = 5;
-        assertThat(schema.minLength(5).isValid("test")).isFalse();
+        String minLength = "4";
+        assertThat(schema.minLength(Integer.parseInt(minLength)).isValid("test")).isTrue();
+        minLength = "5";
+        assertThat(schema.minLength(Integer.parseInt(minLength)).isValid("test")).isFalse();
 
     }
 
@@ -72,30 +72,30 @@ public class ValidatorTests {
 
         NumberSchema schema = v.number();
 
-        int testNumber = 10;
+        String testNumber = "10";
         assertThat(schema.isValid(null)).isTrue();
-        assertThat(schema.isValid(testNumber)).isTrue();
+        assertThat(schema.isValid(Integer.parseInt(testNumber))).isTrue();
 
         schema.required();
 
         assertThat(schema.isValid(null)).isFalse();
-        assertThat(schema.isValid(testNumber)).isTrue();
+        assertThat(schema.isValid(Integer.parseInt(testNumber))).isTrue();
         assertThat(schema.isValid("5")).isFalse();
 
-        assertThat(schema.positive().isValid(testNumber)).isTrue();
-        assertThat(schema.positive().isValid(-testNumber)).isFalse();
+        assertThat(schema.positive().isValid(Integer.parseInt(testNumber))).isTrue();
+        assertThat(schema.positive().isValid(-Integer.parseInt(testNumber))).isFalse();
 
-        int min = 5;
-        int max = 10;
-        schema.range(min, max);
+        String min = "5";
+        String  max = "10";
+        schema.range(Integer.parseInt(min), Integer.parseInt(max));
 
-        assertThat(schema.isValid(testNumber)).isTrue();
-        testNumber = 5;
-        assertThat(schema.isValid(testNumber)).isTrue();
-        testNumber = 4;
-        assertThat(schema.isValid(testNumber)).isFalse();
-        testNumber = 11;
-        assertThat(schema.isValid(testNumber)).isFalse();
+        assertThat(schema.isValid(Integer.parseInt(testNumber))).isTrue();
+        testNumber = "5";
+        assertThat(schema.isValid(Integer.parseInt(testNumber))).isTrue();
+        testNumber = "4";
+        assertThat(schema.isValid(Integer.parseInt(testNumber))).isFalse();
+        testNumber = "11";
+        assertThat(schema.isValid(Integer.parseInt(testNumber))).isFalse();
     }
 
     @Test
@@ -104,12 +104,12 @@ public class ValidatorTests {
 
         NumberSchema schema = v.number();
 
-        int testNumber = 10;
-        assertThat(schema.positive().isValid(testNumber)).isTrue();
-        assertThat(schema.positive().isValid(-testNumber)).isFalse();
+        String testNumber = "10";
+        assertThat(schema.positive().isValid(Integer.parseInt(testNumber))).isTrue();
+        assertThat(schema.positive().isValid(-Integer.parseInt(testNumber))).isFalse();
 
         assertThat(schema.isValid(null)).isTrue();
-        assertThat(schema.isValid(testNumber)).isTrue();
+        assertThat(schema.isValid(Integer.parseInt(testNumber))).isTrue();
     }
 
 
@@ -119,22 +119,22 @@ public class ValidatorTests {
 
         NumberSchema schema = v.number();
 
-        int min = 5;
-        int max = 10;
-        schema.range(min, max);
+        String min = "5";
+        String max = "10";
+        schema.range(Integer.parseInt(min), Integer.parseInt(max));
 
-        int testNumber = 5;
-        assertThat(schema.isValid(testNumber)).isTrue();
-        testNumber = 10;
-        assertThat(schema.isValid(testNumber)).isTrue();
-        testNumber = 4;
-        assertThat(schema.isValid(testNumber)).isFalse();
-        testNumber = 11;
-        assertThat(schema.isValid(testNumber)).isFalse();
+        String testNumber = "5";
+        assertThat(schema.isValid(Integer.parseInt(testNumber))).isTrue();
+        testNumber = "10";
+        assertThat(schema.isValid(Integer.parseInt(testNumber))).isTrue();
+        testNumber = "4";
+        assertThat(schema.isValid(Integer.parseInt(testNumber))).isFalse();
+        testNumber = "11";
+        assertThat(schema.isValid(Integer.parseInt(testNumber))).isFalse();
 
         assertThat(schema.isValid(null)).isTrue();
-        testNumber = 10;
-        assertThat(schema.isValid(testNumber)).isTrue();
+        testNumber = "10";
+        assertThat(schema.isValid(Integer.parseInt(testNumber))).isTrue();
     }
 
 
@@ -156,8 +156,8 @@ public class ValidatorTests {
         assertThat(schema.isValid(new HashMap())).isTrue();
         assertThat(schema.isValid(data)).isTrue();
 
-        int testSize = 2;
-        schema.sizeof(testSize);
+        String testSize = "2";
+        schema.sizeof(Integer.parseInt(testSize));
 
         assertThat(schema.isValid(data)).isFalse();
         data.put("key2", "value2");
@@ -171,15 +171,15 @@ public class ValidatorTests {
 
         MapSchema schema = v.map();
 
-        int testSize = 1;
-        schema.sizeof(testSize);
+        String testSize = "1";
+        schema.sizeof(Integer.parseInt(testSize));
 
         Map<String, String> data = new HashMap<>();
         data.put("key1", "value1");
         assertThat(schema.isValid(data)).isTrue();
 
-        testSize = 2;
-        schema.sizeof(testSize);
+        testSize = "2";
+        schema.sizeof(Integer.parseInt(testSize));
         assertThat(schema.isValid(data)).isFalse();
         data.put("key2", "value2");
         assertThat(schema.isValid(data)).isTrue();
@@ -202,25 +202,24 @@ public class ValidatorTests {
 
         Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
-        human1.put("age", 100);
+        String testNumber = "100";
+        human1.put("age", Integer.parseInt(testNumber));
         assertThat(schema.isValid(human1)).isTrue();
 
         Map<String, Object> human2 = new HashMap<>();
         human2.put("name", "Maya");
         human2.put("age", null);
         assertThat(schema.isValid(human2)).isTrue();
-        schema.isValid(human2); // true
 
         Map<String, Object> human3 = new HashMap<>();
         human3.put("name", "");
         human3.put("age", null);
         assertThat(schema.isValid(human3)).isFalse();
-        schema.isValid(human3); // false
 
         Map<String, Object> human4 = new HashMap<>();
         human4.put("name", "Valya");
-        human4.put("age", -5);
+        testNumber = "5";
+        human4.put("age", -Integer.parseInt(testNumber));
         assertThat(schema.isValid(human4)).isFalse();
-        schema.isValid(human4); // false
     }
 }
