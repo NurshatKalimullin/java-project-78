@@ -8,7 +8,7 @@ public class NumberSchema extends BaseSchema {
         super(Integer.class);
     }
 
-    public NumberSchema required() {
+    public final NumberSchema required() {
         Predicate<Integer> validation = input -> input != null;
         setValidation(validation);
         setRequired(true);
@@ -16,13 +16,13 @@ public class NumberSchema extends BaseSchema {
     }
 
 
-    public NumberSchema positive() {
+    public final NumberSchema positive() {
         Predicate<Integer> validation = input -> input > 0;
         setValidation(validation);
         return this;
     }
 
-    public NumberSchema range(int start, int end) {
+    public final NumberSchema range(int start, int end) {
         Predicate<Integer> validation = input -> input >= start && input <= end;
         setValidation(validation);
         return this;

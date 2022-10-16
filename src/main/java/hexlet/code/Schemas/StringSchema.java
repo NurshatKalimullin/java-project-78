@@ -8,20 +8,20 @@ public class StringSchema extends BaseSchema {
         super(String.class);
     }
 
-    public StringSchema required() {
+    public final StringSchema required() {
         Predicate<String> validation = input ->  !input.isEmpty();
         setValidation(validation);
         setRequired(true);
         return this;
     }
 
-    public StringSchema contains(String sbstr) {
+    public final StringSchema contains(String sbstr) {
         Predicate<String> validation = input -> input.contains(sbstr);
         setValidation(validation);
         return this;
     }
 
-    public StringSchema minLength(int minLength) {
+    public final StringSchema minLength(int minLength) {
         Predicate<String> validation = input -> input.length() >= minLength;
         setValidation(validation);
         return this;

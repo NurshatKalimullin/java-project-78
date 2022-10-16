@@ -48,9 +48,6 @@ public class ValidatorTests {
         assertThat(schema.contains("what").isValid("what does the fox say")).isTrue();
         assertThat(schema.contains("whatthe").isValid("what does the fox say")).isFalse();
 
-        assertThat(schema.isValid("")).isTrue();
-        assertThat(schema.isValid(null)).isTrue();
-
     }
 
 
@@ -61,9 +58,6 @@ public class ValidatorTests {
 
         assertThat(schema.minLength(4).isValid("test")).isTrue();
         assertThat(schema.minLength(5).isValid("test")).isFalse();
-
-        assertThat(schema.isValid("")).isTrue();
-        assertThat(schema.isValid(null)).isTrue();
 
     }
 

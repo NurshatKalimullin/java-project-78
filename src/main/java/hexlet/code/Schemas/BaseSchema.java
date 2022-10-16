@@ -8,7 +8,7 @@ public class BaseSchema {
     private static boolean required = false;
     private final Class<?> schemaType;
 
-    protected BaseSchema(Class<?> schemaType) {
+    public BaseSchema(Class<?> schemaType) {
         this.schemaType = schemaType;
     }
 
@@ -20,19 +20,17 @@ public class BaseSchema {
         this.validation = validation;
     }
 
-    public boolean isValid(Object input) {
+    public final boolean isValid(Object input) {
         boolean result = !required;
         System.out.println(input);
-        if (input == null && required == false
-                || required == false && !schemaType.isInstance(input)) {
+        if (input == null && !required
+                || !required && !schemaType.isInstance(input)) {
             result = true;
         } else if (schemaType.isInstance(input)) {
             if (validation == null) {
                 result = true;
             } else {
-                System.out.println("Now we are testing:");
                 result = validation.test(input);
-                System.out.println("For " + input + " result: " + result);
             }
         }
         return result;

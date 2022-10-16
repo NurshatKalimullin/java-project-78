@@ -10,20 +10,20 @@ public class MapSchema extends BaseSchema {
         super(Map.class);
     }
 
-    public MapSchema required() {
+    public final MapSchema required() {
         Predicate<Map> validation = input -> input instanceof Map;
         setValidation(validation);
         setRequired(true);
         return this;
     }
 
-    public MapSchema sizeof(int size) {
+    public final MapSchema sizeof(int size) {
         Predicate<Map> validation = input -> input.size() == size;
         setValidation(validation);
         return this;
     }
 
-    public MapSchema shape(Map<String, BaseSchema> schemas) {
+    public final MapSchema shape(Map<String, BaseSchema> schemas) {
         Predicate<Map> validation = input -> {
             Set<String> keys = input.keySet();
             boolean result = false;
