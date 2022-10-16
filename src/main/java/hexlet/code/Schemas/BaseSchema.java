@@ -12,7 +12,7 @@ public class BaseSchema {
         this.schemaType = schemaType;
     }
 
-    public void setRequired(boolean required) {
+    public final void setRequired(boolean required) {
         BaseSchema.required = required;
     }
 
