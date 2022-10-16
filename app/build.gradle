@@ -5,11 +5,11 @@ plugins {
     id 'com.adarshr.test-logger' version '3.1.0'
 }
 
-group 'hexlet.code'
+group 'java-project-78.hexlet.code'
 version '1.0-SNAPSHOT'
 
 application {
-    mainClass = 'hexlet.code.App'
+    mainClass = 'java-project-78.hexlet.code.App'
 }
 
 repositories {
