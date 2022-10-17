@@ -20,7 +20,7 @@ public class BaseSchema {
         this.validation = predicate;
     }
 
-    public Predicate getValidation() {
+    public final Predicate getValidation() {
         return validation;
     }
 
