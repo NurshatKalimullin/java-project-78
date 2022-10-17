@@ -12,7 +12,9 @@ public class MapSchema extends BaseSchema {
 
     public final MapSchema required() {
         Predicate<Map> validation = input -> input instanceof Map;
-        setValidation(validation);
+        if (getValidation() == null) {
+            setValidation(validation);
+        }
         setRequired(true);
         return this;
     }

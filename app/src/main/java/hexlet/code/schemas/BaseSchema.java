@@ -20,6 +20,10 @@ public class BaseSchema {
         this.validation = predicate;
     }
 
+    public Predicate getValidation() {
+        return validation;
+    }
+
     public final boolean isValid(Object input) {
         boolean result = !required;
         if (input == null && !required
