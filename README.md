@@ -4,7 +4,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/d97a6d7ea71eb936e48e/test_coverage)](https://codeclimate.com/github/NurshatKalimullin/java-project-78/test_coverage)
 
 
-java-project-78 is for runtime value parsing and validation by asserting the shape of an existing value.
+java-project-78 is a library for runtime value parsing and validation by asserting the shape of an existing value.
 
 StringSchema allows to check string values with following validatiors:
  - required – any not empty sctring
