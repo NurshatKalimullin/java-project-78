@@ -37,6 +37,7 @@ public class BaseSchema {
             result = checks.values().stream().allMatch(check -> check.test(input));
             System.out.println("For " + input + " result is " + result);
         }
+        System.out.println("Input is " + input);
         return result;
     }
 
