@@ -17,6 +17,7 @@ public class NumberSchema extends BaseSchema {
 
 
     public final NumberSchema positive() {
+        clearChecks();
         Predicate<Integer> validation = input -> input > 0;
         addCheck("required", validation);
         return this;
