@@ -18,14 +18,20 @@ public class NumberSchema extends BaseSchema {
 
     public final NumberSchema positive() {
         clearChecks();
-        Predicate<Integer> validation = input -> input > 0;
+        Predicate<Integer> validation = input -> {
+            System.out.println("It is positive");
+            return input > 0;
+        };
         addCheck("required", validation);
         return this;
     }
 
     public final NumberSchema range(int start, int end) {
         clearChecks();
-        Predicate<Integer> validation = input -> input >= start && input <= end;
+        Predicate<Integer> validation = input -> {
+            System.out.println("It is range");
+            return input >= start && input <= end;
+        };
         addCheck("required", validation);
         return this;
     }
