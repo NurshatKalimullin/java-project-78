@@ -23,6 +23,7 @@ public class NumberSchema extends BaseSchema {
     }
 
     public final NumberSchema range(int start, int end) {
+        clearChecks();
         Predicate<Integer> validation = input -> input >= start && input <= end;
         addCheck("required", validation);
         return this;
