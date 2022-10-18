@@ -17,7 +17,6 @@ public class NumberSchema extends BaseSchema {
 
 
     public final NumberSchema positive() {
-        clearChecks();
         Predicate<Integer> validation = input -> {
             System.out.println("It is positive");
             return input > 0;
@@ -27,7 +26,6 @@ public class NumberSchema extends BaseSchema {
     }
 
     public final NumberSchema range(int start, int end) {
-        clearChecks();
         Predicate<Integer> validation = input -> {
             System.out.println("It is range");
             return input >= start && input <= end;
