@@ -6,8 +6,8 @@ import java.util.function.Predicate;
 
 public class BaseSchema {
 
-    protected Map<String, Predicate> checks = new LinkedHashMap<>();
-    protected boolean required = false;
+    private final Map<String, Predicate> checks = new LinkedHashMap<>();
+    private boolean required = false;
     private final Class<?> schemaType;
 
     public BaseSchema(Class<?> type) {
