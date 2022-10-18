@@ -30,6 +30,7 @@ public class BaseSchema {
         boolean result = !required;
         if (input == null && !required
                 || !required && !schemaType.isInstance(input)) {
+            System.out.println("Tests got here with input " + input);
             result = true;
         } else if (schemaType.isInstance(input)) {
             System.out.println(checks);
