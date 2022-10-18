@@ -1,11 +1,13 @@
 package hexlet.code.schemas;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 
 public class BaseSchema {
 
-    private Predicate validation;
-    private boolean required = false;
+    protected Map<String, Predicate> checks = new LinkedHashMap<>();
+    protected boolean required = false;
     private final Class<?> schemaType;
 
     public BaseSchema(Class<?> type) {
@@ -16,12 +18,12 @@ public class BaseSchema {
         this.required = value;
     }
 
-    public final void setValidation(Predicate predicate) {
-        this.validation = predicate;
+    protected final void addCheck(String name, Predicate validate) {
+        checks.put(name, validate);
     }
 
-    public final Predicate getValidation() {
-        return validation;
+    protected final void clearChecks() {
+        checks.clear();
     }
 
     public final boolean isValid(Object input) {
@@ -30,11 +32,9 @@ public class BaseSchema {
                 || !required && !schemaType.isInstance(input)) {
             result = true;
         } else if (schemaType.isInstance(input)) {
-            if (validation == null) {
-                result = true;
-            } else {
-                result = validation.test(input);
-            }
+            System.out.println(checks);
+            result = checks.values().stream().allMatch(check -> check.test(input));
+            System.out.println("For " + input + " result is " + result);
         }
         return result;
     }

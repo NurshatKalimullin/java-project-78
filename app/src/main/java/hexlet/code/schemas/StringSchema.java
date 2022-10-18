@@ -10,22 +10,24 @@ public class StringSchema extends BaseSchema {
 
     public final StringSchema required() {
         Predicate<String> validation = input ->  !input.isEmpty();
-        if (getValidation() == null) {
-            setValidation(validation);
-        }
+        addCheck("required", validation);
         setRequired(true);
         return this;
     }
 
     public final StringSchema contains(String sbstr) {
-        Predicate<String> validation = input -> input.contains(sbstr);
-        setValidation(validation);
+        Predicate<String> validation = input -> {
+            System.out.println("actually we are contains");
+            return input.contains(sbstr);
+        };
+        addCheck("contains", validation);
         return this;
     }
 
     public final StringSchema minLength(int minLength) {
-        Predicate<String> validation = input -> input.length() >= minLength;
-        setValidation(validation);
+        clearChecks();
+        Predicate<String> validation = input ->  input.length() >= minLength;
+        addCheck("minLength", validation);
         return this;
     }
 }

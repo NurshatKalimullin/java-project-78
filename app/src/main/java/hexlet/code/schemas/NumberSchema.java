@@ -10,9 +10,7 @@ public class NumberSchema extends BaseSchema {
 
     public final NumberSchema required() {
         Predicate<Integer> validation = input -> input != null;
-        if (getValidation() == null) {
-            setValidation(validation);
-        }
+        addCheck("required", validation);
         setRequired(true);
         return this;
     }
@@ -20,13 +18,13 @@ public class NumberSchema extends BaseSchema {
 
     public final NumberSchema positive() {
         Predicate<Integer> validation = input -> input > 0;
-        setValidation(validation);
+        addCheck("required", validation);
         return this;
     }
 
     public final NumberSchema range(int start, int end) {
         Predicate<Integer> validation = input -> input >= start && input <= end;
-        setValidation(validation);
+        addCheck("required", validation);
         return this;
     }
 }

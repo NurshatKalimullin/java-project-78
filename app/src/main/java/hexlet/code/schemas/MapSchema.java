@@ -12,16 +12,14 @@ public class MapSchema extends BaseSchema {
 
     public final MapSchema required() {
         Predicate<Map> validation = input -> input instanceof Map;
-        if (getValidation() == null) {
-            setValidation(validation);
-        }
+        addCheck("required", validation);
         setRequired(true);
         return this;
     }
 
     public final MapSchema sizeof(int size) {
         Predicate<Map> validation = input -> input.size() == size;
-        setValidation(validation);
+        addCheck("sizeof", validation);
         return this;
     }
 
@@ -38,7 +36,7 @@ public class MapSchema extends BaseSchema {
             }
             return result;
         };
-        setValidation(validation);
+        addCheck("shape", validation);
         return this;
     }
 }
