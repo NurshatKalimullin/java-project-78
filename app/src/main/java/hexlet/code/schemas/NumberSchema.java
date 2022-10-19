@@ -21,7 +21,7 @@ public class NumberSchema extends BaseSchema {
             System.out.println("It is positive");
             return input > 0;
         };
-        addCheck("required", validation);
+        addCheck("positive", validation);
         return this;
     }
 
@@ -30,7 +30,7 @@ public class NumberSchema extends BaseSchema {
             System.out.println("It is range");
             return input >= start && input <= end;
         };
-        addCheck("required", validation);
+        addCheck("range", validation);
         return this;
     }
 }
