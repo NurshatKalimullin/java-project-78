@@ -29,7 +29,7 @@ public class BaseSchema {
 
     public final boolean isValid(Object input) {
         boolean result = !required;
-        if (schemaType.isInstance(input)){
+        if (schemaType.isInstance(input)) {
             result = checks.values().stream().allMatch(check -> check.test(input));
         }
         return result;
