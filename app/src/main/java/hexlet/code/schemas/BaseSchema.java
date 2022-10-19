@@ -8,6 +8,7 @@ public class BaseSchema {
 
     private final Map<String, Predicate> checks = new LinkedHashMap<>();
     private boolean required = false;
+    //there is no way we can remove schemaType because of null input values
     private final Class<?> schemaType;
 
     public BaseSchema(Class<?> type) {
@@ -28,19 +29,8 @@ public class BaseSchema {
 
     public final boolean isValid(Object input) {
         boolean result = !required;
-        if (input == null && !required
-                || !required && !schemaType.isInstance(input)) {
-            System.out.println("Tests got here with input " + input);
-            result = true;
-        } else if (schemaType.isInstance(input)) {
-            System.out.println(checks);
+        if (schemaType.isInstance(input)){
             result = checks.values().stream().allMatch(check -> check.test(input));
-            System.out.println("For " + input + " result is " + result);
-        }
-        try {
-            System.out.println("Input type is " + input.getClass());
-        } catch (Exception e) {
-            System.out.println(e);
         }
         return result;
     }
