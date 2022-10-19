@@ -16,10 +16,7 @@ public class StringSchema extends BaseSchema {
     }
 
     public final StringSchema contains(String sbstr) {
-        Predicate<String> validation = input -> {
-            System.out.println("actually we are contains");
-            return input.contains(sbstr);
-        };
+        Predicate<String> validation = input -> input.contains(sbstr);
         addCheck("contains", validation);
         return this;
     }
