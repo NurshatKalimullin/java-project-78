@@ -1,7 +1,6 @@
 package hexlet.code.schemas;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Predicate;
 
 public class MapSchema extends BaseSchema {
@@ -24,19 +23,25 @@ public class MapSchema extends BaseSchema {
     }
 
     public final MapSchema shape(Map<String, BaseSchema> schemas) {
-        Predicate<Map> validation = input -> {
-            Set<String> keys = input.keySet();
-            boolean result = false;
-            for (String key : keys) {
-                result = schemas.get(key).isValid(input.get(key));
-                setRequired(false);
-                if (!result) {
-                    break;
-                }
-            }
-            return result;
-        };
-        addCheck("shape", validation);
+//        Predicate<Map> validation = input -> {
+//            Set<String> keys = input.keySet();
+//            boolean result = false;
+//            for (String key : keys) {
+//                result = schemas.get(key).isValid(input.get(key));
+//                setRequired(false);
+//                if (!result) {
+//                    break;
+//                }
+//            }
+//            return result;
+//        };
+//        addCheck("shape", validation);
+//        return this;
+        addCheck(
+                "shape",
+                value -> schemas.entrySet().stream().allMatch(e ->
+                        e.getValue().isValid(((Map<?, ?>) value).get(e.getKey())))
+        );
         return this;
     }
 }
