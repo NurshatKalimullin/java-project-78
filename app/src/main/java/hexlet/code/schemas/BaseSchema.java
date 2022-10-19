@@ -8,7 +8,7 @@ public class BaseSchema {
 
     private final Map<String, Predicate> checks = new LinkedHashMap<>();
     private boolean required = false;
-    //there is no way we can remove schemaType because of null input values
+    //there is no way we can remove schemaType because of other data type input values
     private final Class<?> schemaType;
 
     public BaseSchema(Class<?> type) {
