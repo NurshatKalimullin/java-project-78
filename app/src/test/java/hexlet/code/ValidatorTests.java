@@ -108,9 +108,13 @@ public class ValidatorTests {
         String testNumber = "10";
         assertThat(schema.positive().isValid(Integer.parseInt(testNumber))).isTrue();
         assertThat(schema.positive().isValid(-Integer.parseInt(testNumber))).isFalse();
+        assertThat(schema.isValid(null)).isTrue();
 
+        schema.required();
+
+        assertThat(schema.positive().isValid(Integer.parseInt(testNumber))).isTrue();
+        assertThat(schema.positive().isValid(-Integer.parseInt(testNumber))).isFalse();
         assertThat(schema.isValid(null)).isFalse();
-        assertThat(schema.isValid(Integer.parseInt(testNumber))).isTrue();
     }
 
 

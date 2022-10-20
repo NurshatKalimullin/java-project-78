@@ -19,6 +19,10 @@ public class BaseSchema {
         this.required = value;
     }
 
+    public boolean isRequired() {
+        return required;
+    }
+
     protected final void addCheck(String name, Predicate validate) {
         checks.put(name, validate);
     }
@@ -33,6 +37,7 @@ public class BaseSchema {
 //            result = checks.values().stream().allMatch(check -> check.test(input));
 //        }
 //        return result;
+        System.out.println(checks);
         boolean result = checks.values().stream().allMatch(check -> check.test(input));
         System.out.println("For " + input + " resul is " + result);
         return result;
