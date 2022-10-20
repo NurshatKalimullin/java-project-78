@@ -16,7 +16,8 @@ public class MapSchema extends BaseSchema {
     }
 
     public final MapSchema sizeof(int size) {
-        Predicate<?> validation = input -> ((Map<?, ?>) input).size() == size;
+        Predicate<?> validation = input -> input instanceof Map
+                && ((Map<?, ?>) input).size() == size;
         addCheck("sizeof", validation);
         return this;
     }
@@ -24,8 +25,9 @@ public class MapSchema extends BaseSchema {
     public final MapSchema shape(Map<String, BaseSchema> schemas) {
         addCheck(
                 "shape",
-                value -> schemas.entrySet().stream().allMatch(e ->
-                        e.getValue().isValid(((Map<?, ?>) value).get(e.getKey())))
+                input -> input instanceof Map &&
+                        schemas.entrySet().stream().allMatch(e ->
+                        e.getValue().isValid(((Map<?, ?>) input).get(e.getKey())))
         );
         return this;
     }
