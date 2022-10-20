@@ -33,7 +33,9 @@ public class BaseSchema {
 //            result = checks.values().stream().allMatch(check -> check.test(input));
 //        }
 //        return result;
-        return checks.values().stream().allMatch(check -> check.test(input));
+        boolean result = checks.values().stream().allMatch(check -> check.test(input));
+        System.out.println("For " + input + " resul is " + result);
+        return result;
     }
 
 }
