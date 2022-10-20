@@ -18,7 +18,7 @@ public class NumberSchema extends BaseSchema {
     public final NumberSchema positive() {
         Predicate<?> validation = input -> {
             System.out.println(isRequired());
-            if (isRequired() || input instanceof Integer) {;
+            if (isRequired() || input instanceof Integer) {
                 return input instanceof Integer && (Integer) input > 0;
             }
             return true;

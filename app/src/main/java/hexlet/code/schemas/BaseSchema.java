@@ -19,7 +19,7 @@ public class BaseSchema {
         this.required = value;
     }
 
-    public boolean isRequired() {
+    public final boolean isRequired() {
         return required;
     }
 
