@@ -42,7 +42,6 @@ public class ValidatorTests {
 
     @Test
     public void testStringSchemaMinLength() {
-        Validator v = new Validator();
         StringSchema schema = v.string();
         String minLength = "4";
         assertThat(schema.minLength(Integer.parseInt(minLength)).isValid("test")).isTrue();
@@ -54,7 +53,6 @@ public class ValidatorTests {
 
     @Test
     public void testStringSchemaContainsWithoutRequired() {
-        Validator v = new Validator();
         StringSchema schema = v.string();
 
         assertThat(schema.contains("wh").isValid("what does the fox say")).isTrue();
@@ -66,7 +64,6 @@ public class ValidatorTests {
 
     @Test
     public void testStringSchemaMinLengthWithoutRequired() {
-        Validator v = new Validator();
         StringSchema schema = v.string();
 
         String minLength = "4";
@@ -79,8 +76,6 @@ public class ValidatorTests {
 
     @Test
     public void testNumberSchemaForward() {
-        Validator v = new Validator();
-
         NumberSchema schema = v.number();
 
         String testNumber = "10";
@@ -111,8 +106,6 @@ public class ValidatorTests {
 
     @Test
     public void testNumberSchemaPositiveWithoutRequired() {
-        Validator v = new Validator();
-
         NumberSchema schema = v.number();
 
         String testNumber = "10";
@@ -130,8 +123,6 @@ public class ValidatorTests {
 
     @Test
     public void testNumberSchemaRangeWithoutRequired() {
-        Validator v = new Validator();
-
         NumberSchema schema = v.number();
 
         String min = "5";
@@ -155,8 +146,6 @@ public class ValidatorTests {
 
     @Test
     public void testMapSchemaForward() {
-        Validator v = new Validator();
-
         MapSchema schema = v.map();
 
         assertThat(schema.isValid(null)).isTrue();
@@ -182,8 +171,6 @@ public class ValidatorTests {
 
     @Test
     public void testMapSchemaSizeofWithoutRequired() {
-        Validator v = new Validator();
-
         MapSchema schema = v.map();
 
         String testSize = "1";
@@ -205,9 +192,6 @@ public class ValidatorTests {
 
     @Test
     public void testMapSchemaSizeofShape() {
-
-        Validator v = new Validator();
-
         MapSchema schema = v.map();
 
         Map<String, BaseSchema> schemas = new HashMap<>();
