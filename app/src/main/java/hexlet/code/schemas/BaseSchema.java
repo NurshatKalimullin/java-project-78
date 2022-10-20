@@ -25,10 +25,7 @@ public class BaseSchema {
     }
 
     public final boolean isValid(Object input) {
-        System.out.println(checks);
-        boolean result = checks.values().stream().allMatch(check -> check.test(input));
-        System.out.println("For " + input + " resul is " + result);
-        return result;
+        return checks.values().stream().allMatch(check -> check.test(input));
     }
 
 }
