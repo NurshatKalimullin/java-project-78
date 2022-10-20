@@ -10,14 +10,13 @@ public class MapSchema extends BaseSchema {
     }
 
     public final MapSchema required() {
-        Predicate<Map> validation = input -> input instanceof Map;
-        addCheck("required", validation);
+        addCheck("required", input -> input instanceof Map);
         setRequired(true);
         return this;
     }
 
     public final MapSchema sizeof(int size) {
-        Predicate<Map> validation = input -> input.size() == size;
+        Predicate<?> validation = input -> ((Map<?, ?>) input).size() == size;
         addCheck("sizeof", validation);
         return this;
     }

@@ -9,21 +9,21 @@ public class NumberSchema extends BaseSchema {
     }
 
     public final NumberSchema required() {
-        Predicate<Integer> validation = input -> input != null;
-        addCheck("required", validation);
+        addCheck("required", input -> input instanceof Integer);
         setRequired(true);
         return this;
     }
 
 
     public final NumberSchema positive() {
-        Predicate<Integer> validation = input -> input > 0;
+        Predicate<?> validation = input -> input instanceof Integer && (Integer) input > 0;
         addCheck("positive", validation);
         return this;
     }
 
+
     public final NumberSchema range(int start, int end) {
-        Predicate<Integer> validation = input -> input >= start && input <= end;
+        Predicate<?> validation = input -> input instanceof Integer && (Integer) input >= start && (Integer) input <= end;
         addCheck("range", validation);
         return this;
     }

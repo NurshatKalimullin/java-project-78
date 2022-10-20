@@ -28,11 +28,12 @@ public class BaseSchema {
     }
 
     public final boolean isValid(Object input) {
-        boolean result = !required;
-        if (schemaType.isInstance(input)) {
-            result = checks.values().stream().allMatch(check -> check.test(input));
-        }
-        return result;
+//        boolean result = !required;
+//        if (schemaType.isInstance(input)) {
+//            result = checks.values().stream().allMatch(check -> check.test(input));
+//        }
+//        return result;
+        return checks.values().stream().allMatch(check -> check.test(input));
     }
 
 }
