@@ -13,9 +13,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ValidatorTests {
 
+
+    private final Validator v = new Validator();
+
     @Test
     public void testStringSchemaForward() {
-        Validator v = new Validator();
         StringSchema schema = v.string();
 
         assertThat(schema.isValid("")).isTrue();
@@ -35,12 +37,20 @@ public class ValidatorTests {
 
         assertThat(schema.isValid("what does the fox say")).isFalse();
 
+    }
+
+
+    @Test
+    public void testStringSchemaMinLength() {
+        Validator v = new Validator();
+        StringSchema schema = v.string();
         String minLength = "4";
         assertThat(schema.minLength(Integer.parseInt(minLength)).isValid("test")).isTrue();
         minLength = "5";
         assertThat(schema.minLength(Integer.parseInt(minLength)).isValid("test")).isFalse();
 
     }
+
 
     @Test
     public void testStringSchemaContainsWithoutRequired() {
@@ -213,21 +223,21 @@ public class ValidatorTests {
         assertThat(schema.isValid(human1)).isTrue();
         System.out.println("Here2");
 
-//        Map<String, Object> human2 = new HashMap<>();
-//        human2.put("name", "Maya");
-//        human2.put("age", null);
-//        assertThat(schema.isValid(human2)).isTrue();
-//        System.out.println("Here3");
-//
-//        Map<String, Object> human3 = new HashMap<>();
-//        human3.put("name", "");
-//        human3.put("age", null);
-//        assertThat(schema.isValid(human3)).isFalse();
-//
-//        Map<String, Object> human4 = new HashMap<>();
-//        human4.put("name", "Valya");
-//        testNumber = "5";
-//        human4.put("age", -Integer.parseInt(testNumber));
-//        assertThat(schema.isValid(human4)).isFalse();
+        Map<String, Object> human2 = new HashMap<>();
+        human2.put("name", "Maya");
+        human2.put("age", null);
+        assertThat(schema.isValid(human2)).isTrue();
+        System.out.println("Here3");
+
+        Map<String, Object> human3 = new HashMap<>();
+        human3.put("name", "");
+        human3.put("age", null);
+        assertThat(schema.isValid(human3)).isFalse();
+
+        Map<String, Object> human4 = new HashMap<>();
+        human4.put("name", "Valya");
+        testNumber = "5";
+        human4.put("age", -Integer.parseInt(testNumber));
+        assertThat(schema.isValid(human4)).isFalse();
     }
 }

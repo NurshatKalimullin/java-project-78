@@ -23,7 +23,6 @@ public class StringSchema extends BaseSchema {
     }
 
     public final StringSchema minLength(int minLength) {
-        clearChecks();
         Predicate<?> validation = input ->  input instanceof String
                 && ((String) input).length() >= minLength;
         addCheck("minLength", validation);

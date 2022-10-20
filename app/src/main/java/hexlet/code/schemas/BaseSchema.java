@@ -8,11 +8,8 @@ public class BaseSchema {
 
     private final Map<String, Predicate> checks = new LinkedHashMap<>();
     private boolean required = false;
-    //there is no way we can remove schemaType because of other data type input values
-    private final Class<?> schemaType;
 
     public BaseSchema(Class<?> type) {
-        this.schemaType = type;
     }
 
     public final void setRequired(boolean value) {
@@ -27,16 +24,7 @@ public class BaseSchema {
         checks.put(name, validate);
     }
 
-    protected final void clearChecks() {
-        checks.clear();
-    }
-
     public final boolean isValid(Object input) {
-//        boolean result = !required;
-//        if (schemaType.isInstance(input)) {
-//            result = checks.values().stream().allMatch(check -> check.test(input));
-//        }
-//        return result;
         System.out.println(checks);
         boolean result = checks.values().stream().allMatch(check -> check.test(input));
         System.out.println("For " + input + " resul is " + result);
