@@ -16,14 +16,17 @@ public class NumberSchema extends BaseSchema {
 
 
     public final NumberSchema positive() {
-        Predicate<?> validation = input -> input instanceof Integer && (Integer) input > 0;
+        Predicate<?> validation = input -> input instanceof Integer
+                && (Integer) input > 0;
         addCheck("positive", validation);
         return this;
     }
 
 
     public final NumberSchema range(int start, int end) {
-        Predicate<?> validation = input -> input instanceof Integer && (Integer) input >= start && (Integer) input <= end;
+        Predicate<?> validation = input -> input instanceof Integer
+                && (Integer) input >= start
+                && (Integer) input <= end;
         addCheck("range", validation);
         return this;
     }
