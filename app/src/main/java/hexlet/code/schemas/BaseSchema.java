@@ -9,9 +9,6 @@ public class BaseSchema {
     private final Map<String, Predicate> checks = new LinkedHashMap<>();
     private boolean required = false;
 
-    public BaseSchema(Class<?> type) {
-    }
-
     public final void setRequired(boolean value) {
         this.required = value;
     }

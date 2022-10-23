@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 public class StringSchema extends BaseSchema {
 
     public StringSchema() {
-        super(String.class);
     }
 
     public final StringSchema required() {

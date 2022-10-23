@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 public class MapSchema extends BaseSchema {
 
     public MapSchema() {
-        super(Map.class);
     }
 
     public final MapSchema required() {

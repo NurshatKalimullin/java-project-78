@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 public class NumberSchema extends BaseSchema {
 
     public NumberSchema() {
-        super(Integer.class);
     }
 
     public final NumberSchema required() {

@@ -198,20 +198,17 @@ public class ValidatorTests {
         schemas.put("name", v.string().required());
         schemas.put("age", v.number().positive());
         schema.shape(schemas);
-        System.out.println("Here");
 
         Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
         String testNumber = "100";
         human1.put("age", Integer.parseInt(testNumber));
         assertThat(schema.isValid(human1)).isTrue();
-        System.out.println("Here2");
 
         Map<String, Object> human2 = new HashMap<>();
         human2.put("name", "Maya");
         human2.put("age", null);
         assertThat(schema.isValid(human2)).isTrue();
-        System.out.println("Here3");
 
         Map<String, Object> human3 = new HashMap<>();
         human3.put("name", "");
